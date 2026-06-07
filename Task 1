@@ -1,0 +1,127 @@
+#include <stdio.h>
+
+// For mathematical functions like sqrt, pow, sin, etc.
+#include <math.h>    
+
+// Define constant value of PI
+#define PI 3.14159265
+
+int main() {
+    
+    // To store user choice
+    int choice;
+    
+    // To store input numbers
+    double num1, num2;
+    
+    // To store result of operation
+    double result;          
+
+    // Infinite loop to keep calculator running
+    do {
+        
+        // Display menu
+        printf("\n===== Scientific Calculator =====\n");
+        printf("1. Addition\n2. Subtraction\n3. Multiplication\n4. Division\n");
+        printf("5. Power (x^y)\n6. Square Root\n7. Sine\n8. Cosine\n9. Tangent\n");
+        printf("10. Natural Log (ln)\n11. Log Base 10\n12. Exponential (e^x)\n");
+        printf("13. Absolute Value\n14. Cube Root\n15. Modulus (fmod)\n");
+        printf("16. Round\n17. Floor\n18. Ceil\n19. Exit\n");
+
+        // Take user choice
+        printf("Enter your choice (1-19): ");
+        scanf("%d", &choice);
+
+        // Decide input type (one number or two numbers)
+        if (choice == 6 || (choice >= 7 && choice <= 14) || choice >= 16) {
+            
+            // Operations needing one number
+            printf("Enter one number: ");
+            scanf("%lf", &num1);
+        } 
+        else if (choice >= 1 && choice <= 5 || choice == 15) {
+            
+            // Operations needing two numbers
+            printf("Enter two numbers: ");
+            scanf("%lf %lf", &num1, &num2);
+        }
+
+        // Perform operation using switch-case
+        switch (choice) {
+
+            // Addition
+            case 1: result = num1 + num2; break; 
+            
+            // Subtraction
+            case 2: result = num1 - num2; break; 
+            
+            // Multiplication
+            case 3: result = num1 * num2; break; 
+
+            // Division with zero check
+            case 4: 
+                if (num2 != 0)
+                    result = num1 / num2;
+                else {
+                    printf("Error: Cannot divide by zero.\n");
+                    
+                    // Skip rest and go to next iteration
+                    continue; 
+                }
+                break;
+
+            // Power
+            case 5: result = pow(num1, num2); break;
+            
+            // Square root
+            case 6: result = sqrt(num1); break;
+            
+            // Convert degree to radian
+            case 7: result = sin(num1 * PI / 180); break;   
+            case 8: result = cos(num1 * PI / 180); break;
+            case 9: result = tan(num1 * PI / 180); break;
+            
+             // Natural log
+            case 10: result = log(num1); break;
+            
+            // Base 10 log
+            case 11: result = log10(num1); break;
+            
+            // e^x
+            case 12: result = exp(num1); break;
+            
+            // Absolute value
+            case 13: result = fabs(num1); break;
+            
+            // Cube root
+            case 14: result = cbrt(num1); break;
+            
+            // Modulus
+            case 15: result = fmod(num1, num2); break;
+            
+            // Round
+            case 16: result = round(num1); break;
+            
+            // Floor
+            case 17: result = floor(num1); break;
+            
+            // Ceil
+            case 18: result = ceil(num1); break;            
+
+            case 19:
+                printf("Exiting Calculator.\n");
+                return 0; 
+
+            default:
+                printf("Invalid choice.\n");
+                continue;
+        }
+
+        // Print result
+        printf("Result = %.4lf\n", result);
+
+    // Loop runs forever
+    } while (1); 
+
+    return 0;
+}
